@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand Neutrals */
+  --color-brand-dark: #111111;
+  --color-brand-darker: #0A0A0A;
+
+  /* Logo Gold Accents */
+  --color-gold: #E6A778;
+  --color-gold-muted: #C49470;
+  --color-gold-deep: #CC7F43;
+}
+
+/* Optional: Set your global body defaults here too */
+@layer base {
+  body {
+    background-color: var(--color-brand-dark);
+    color: #f5f5f5; /* Tailwind's neutral-100 */
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
