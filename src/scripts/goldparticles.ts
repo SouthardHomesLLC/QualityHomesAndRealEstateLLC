@@ -23,7 +23,7 @@ export function particles() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     //Particles Geometry & Material
-    const particlesCount = 500;
+    const particlesCount = 300;
     const positions = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount * 3; i += 3) {
@@ -80,9 +80,9 @@ export function particles() {
       //Make particles gently drift upwards and sway side to side
       for (let i = 0; i < particlesCount * 3; i += 3) {
         //Slow upward movement
-        currentPositions[i + 1] += 0.002; 
+        currentPositions[i + 1] += 0.001; 
         //Swaying effect using sine waves based on particle index
-        currentPositions[i] += Math.sin(elapsedTime + i) * 0.001;
+        currentPositions[i] += Math.sin(elapsedTime + i) * 0.0005;
 
         //Reset particle to bottom if it goes too high
         if (currentPositions[i + 1] > 5) {

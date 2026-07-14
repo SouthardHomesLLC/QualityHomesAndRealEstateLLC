@@ -6,9 +6,15 @@ import logoImage from '@assets/Logo.png';
 
 <main class="relative flex min-h-[85vh] flex-col items-center justify-center p-8 text-center overflow-hidden">  
     <div class="relative z-10 flex flex-col items-center">
-        <Image src={logoImage} alt="Quality Homes Logo" width={320} height={320} class="mb-8 dropping-shadow" />
+        <Image 
+            src={logoImage} 
+            alt="Quality Homes Logo" 
+            width={320} 
+            height={320} 
+            class="mb-8 dropping-shadow bg-gold/2 rounded-full" 
+        />
 
-        <h1 class="text-4xl md:text-6xl font-extrabold text-gold tracking-tight mb-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gold-deep tracking-tight mb-4">
             Something Quality is Building.
         </h1>
         
@@ -21,6 +27,6 @@ import logoImage from '@assets/Logo.png';
 <style>
   /* Optional: Adds a subtle glow effect to the logo image so it blends into the particles */
   .dropping-shadow {
-    filter: drop-shadow(0 0 80px rgba(230, 167, 120, 0.7));
+    filter: drop-shadow(0 0px 100px var(--color-gold));
   }
 </style>
