@@ -2,16 +2,9 @@
 // src/components/Hero.astro
 import { Image } from 'astro:assets';
 import logoImage from '@assets/Logo.png';
-import GoldParticles from './GoldParticles.astro';
 ---
 
-<!-- Added relative class so particles stay contained behind everything -->
-<main class="relative flex min-h-[85vh] flex-col items-center justify-center p-8 text-center overflow-hidden">
-    
-    <!-- Three.js Canvas Background -->
-    <GoldParticles />
-
-    <!-- Content Wrapper with z-10 to ensure text stays crisply on top -->
+<main class="relative flex min-h-[85vh] flex-col items-center justify-center p-8 text-center overflow-hidden">  
     <div class="relative z-10 flex flex-col items-center">
         <Image src={logoImage} alt="Quality Homes Logo" width={320} height={320} class="mb-8 dropping-shadow" />
 
@@ -28,6 +21,6 @@ import GoldParticles from './GoldParticles.astro';
 <style>
   /* Optional: Adds a subtle glow effect to the logo image so it blends into the particles */
   .dropping-shadow {
-    filter: drop-shadow(0 0 25px rgba(230, 167, 120, 0.15));
+    filter: drop-shadow(0 0 80px rgba(230, 167, 120, 0.7));
   }
 </style>
