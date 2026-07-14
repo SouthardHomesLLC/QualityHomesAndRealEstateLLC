@@ -1,5 +1,32 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": ["dist"],
+  "compilerOptions": {
+        "ignoreDeprecations": "6.0", //Ignore deprecation warnings for Astro 6.0
+        "baseUrl": "src",
+        "paths": {
+            "@components/*": [
+                "components/*"
+            ],
+            "@layouts/*": [
+                "layouts/*"
+            ],
+            "@assets/*": [
+                "assets/*"
+            ],
+            "@pages/*": [
+                "pages/*"
+            ],
+            "@data/*": [
+                "data/*"
+            ],
+            "@styles/*": [
+                "styles/*"
+            ],
+            "@scripts/*": [
+                "scripts/*"
+            ],
+        }
+    }
 }

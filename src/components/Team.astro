@@ -1,0 +1,35 @@
+---
+// src/components/Team.astro
+import { Image } from 'astro:assets';
+import founderImage from '@assets/christa.jpg'; 
+---
+
+<section class="w-full max-w-4xl mx-auto px-6 py-24 border-t border-neutral-900/60">
+  <div class="flex flex-col md:flex-row items-center gap-12 bg-brand-darker/30 p-8 md:p-12 rounded-3xl border border-neutral-800 shadow-xl">
+    
+    <!-- Profile Image Ring -->
+    <div class="relative shrink-0 w-44 h-44 rounded-2xl overflow-hidden border border-gold/30 p-2 bg-brand-dark">
+      <div class="w-full h-full rounded-xl overflow-hidden">
+        <Image 
+          src={founderImage} 
+          alt="Principal Broker" 
+          width={176} 
+          height={176} 
+          class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
+        />
+      </div>
+    </div>
+
+    <!-- Bio Content -->
+    <div class="flex-1 text-center md:text-left">
+      <span class="text-xs font-bold tracking-widest text-gold uppercase block mb-2">The Driving Force</span>
+      <h2 class="text-3xl font-extrabold text-neutral-100 tracking-tight mb-1">Christa Summerville</h2>
+      <p class="text-sm font-medium text-gold/80 mb-4">Founder and CEO</p>
+      
+      <p class="text-neutral-400 leading-relaxed max-w-2xl">
+        With a vision built on exceptional standards and unparalleled local expertise, Alex founded Quality Homes and Real Estate LLC to deliver a seamless, boutique property experience. Dedicated to transparency and elite client advocacy, ensuring every key handed over represents a premium milestone.
+      </p>
+    </div>
+
+  </div>
+</section>

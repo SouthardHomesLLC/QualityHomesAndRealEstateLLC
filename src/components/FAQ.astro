@@ -1,0 +1,38 @@
+---
+// src/components/FAQ.astro
+const faqs = [
+  {
+    question: "What areas will Quality Homes and Real Estate LLC serve?",
+    answer: "We will primarily serve Terre Haute, Indiana, and the surrounding Wabash Valley communities."
+  },
+  {
+    question: "When is the full website launching?",
+    answer: "Our comprehensive digital platform is currently slated to debut in 2028"
+  }
+];
+---
+
+<section class="w-full max-w-3xl mx-auto px-6 py-20 border-t border-neutral-900/60">
+  <div class="text-center mb-12">
+    <p class="text-3xl font-extrabold text-gold tracking-tight">Frequently Asked Questions</p>
+  </div>
+
+  <div class="space-y-4">
+    {faqs.map((faq) => (
+      <details class="group bg-brand-darker/50 border border-neutral-800 rounded-xl [&_summary::-webkit-details-marker]:hidden">
+        <summary class="flex items-center justify-between gap-4 p-5 font-semibold text-neutral-200 cursor-pointer select-none hover:text-gold transition-colors">
+          <span>{faq.question}</span>
+          
+          <!-- Custom SVG Indicator Arrow -->
+          <svg class="w-5 h-5 text-neutral-500 group-open:-rotate-180 transition-transform duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        
+        <div class="px-5 pb-5 text-neutral-400 text-sm leading-relaxed border-t border-neutral-900/40 pt-3">
+          {faq.answer}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
