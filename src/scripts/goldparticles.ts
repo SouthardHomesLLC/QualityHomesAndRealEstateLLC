@@ -28,9 +28,9 @@ export function particles() {
 
     for (let i = 0; i < particlesCount * 3; i += 3) {
       //Spread particles across the screen
-      positions[i] = (Math.random() - 0.5) * 12;     // X axis
-      positions[i + 1] = (Math.random() - 0.5) * 10; // Y axis
-      positions[i + 2] = (Math.random() - 0.5) * 5;  // Z axis
+      positions[i] = (Math.random() - 0.5) * 12;     //X axis
+      positions[i + 1] = (Math.random() - 0.5) * 10; //Y axis
+      positions[i + 2] = (Math.random() - 0.5) * 5;  //Z axis
     }
 
     const geometry = new THREE.BufferGeometry();
@@ -54,7 +54,7 @@ export function particles() {
 
     const material = new THREE.PointsMaterial({
       size: 0.04,
-      color: new THREE.Color('#E6A778'), // logo gold!
+      color: new THREE.Color('#E6A778'), //logo gold
       transparent: true,
       opacity: 0.6,
       blending: THREE.AdditiveBlending,
@@ -82,7 +82,7 @@ export function particles() {
         //Slow upward movement
         currentPositions[i + 1] += 0.001; 
         //Swaying effect using sine waves based on particle index
-        currentPositions[i] += Math.sin(elapsedTime + i) * 0.0005;
+        currentPositions[i] += Math.sin(elapsedTime + i) * 0.0008;
 
         //Reset particle to bottom if it goes too high
         if (currentPositions[i + 1] > 5) {
