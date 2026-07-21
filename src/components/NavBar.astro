@@ -1,49 +1,267 @@
 ---
 // src/components/NavBar.astro
+
 import { Image } from "astro:assets";
 import logoImage from "@assets/Quality Homes & Real Estate Logo.jpg";
 
-export interface linkItem {
+export interface LinkItem {
   linkText: string;
   href: string;
+  visible: boolean;
 }
 
-export const navItems: linkItem[] = [
-  { linkText: "Home", href: "/" },
-  { linkText: "For Sale", href: "/homes-for-sale" },
-  { linkText: "Rentals", href: "/rentals" },
-  { linkText: "About", href: "/about" },
+export const navItems: LinkItem[] = [
+  {
+    linkText: "Home",
+    href: "/",
+    visible: true,
+  },
+  {
+    linkText: "For Sale",
+    href: "/homes-for-sale",
+    visible: false,
+  },
+  {
+    linkText: "Rentals",
+    href: "/rentals",
+    visible: false,
+  },
+  {
+    linkText: "About",
+    href: "/about",
+    visible: true,
+  },
 ];
+
+const pathname = Astro.url.pathname;
+
+const visibleNavItems = navItems.filter((item) => item.visible);
+
+const isActive = (href: string) =>
+  href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(`${href}/`);
+
+const isContactActive =
+  pathname === "/contact" || pathname.startsWith("/contact/");
 ---
 
 <header
   class="sticky top-0 z-50 w-full border-b
-  border-neutral-800 bg-brand-dark/80 backdrop-blur-md"
+        border-neutral-800 bg-brand-dark/90
+        shadow-lg shadow-black/10 backdrop-blur-md"
 >
-  <div class="mx-auto flex max-w-7xl h-16 items-center justify-between px-6">
-    <a href="/" class="flex items-center gap-2">
+  <nav
+    aria-label="Primary navigation"
+    class="mx-auto flex h-16 max-w-7xl
+            items-center justify-between gap-4 px-4 sm:px-6"
+  >
+    <!-- Brand -->
+    <a
+      href="/"
+      aria-label="Quality Homes and Real Estate LLC home"
+      class="group flex min-w-0 items-center gap-2"
+    >
       <Image
         src={logoImage}
-        alt="Quality Homes Logo"
+        alt=""
         width={45}
         height={45}
-        class="object-contain rounded-full"
+        class="h-11 w-11 shrink-0 rounded-full object-contain"
       />
+
       <span
-        class="text-sm font-semibold tracking-wider text-gold hidden sm:block"
+        class="hidden truncate text-sm font-semibold
+                    tracking-wider text-gold
+                    transition-colors group-hover:text-gold-deep
+                    sm:block"
       >
         Quality Homes and Real Estate LLC
       </span>
     </a>
 
-    <a href="/contact" class="flex items-center gap-2">
+    <!-- Mobile menu toggle -->
+    <input
+      id="navigation-toggle"
+      type="checkbox"
+      class="peer sr-only"
+      aria-label="Toggle navigation menu"
+      aria-controls="primary-navigation-links"
+      aria-expanded="false"
+    />
+
+    <label
+      for="navigation-toggle"
+      aria-hidden="true"
+      class="relative z-30 flex h-10 w-10
+                cursor-pointer flex-col items-center justify-center
+                gap-1.5 rounded-lg border border-neutral-800
+                bg-brand-darker/60 transition-colors
+                hover:border-gold/40
+                peer-focus-visible:outline-none
+                peer-focus-visible:ring-2
+                peer-focus-visible:ring-gold/50
+                peer-focus-visible:ring-offset-2
+                peer-focus-visible:ring-offset-brand-dark
+                md:hidden
+                peer-checked:[&>span:nth-child(1)]:translate-y-2
+                peer-checked:[&>span:nth-child(1)]:rotate-45
+                peer-checked:[&>span:nth-child(2)]:scale-x-0
+                peer-checked:[&>span:nth-child(2)]:opacity-0
+                peer-checked:[&>span:nth-child(3)]:-translate-y-2
+                peer-checked:[&>span:nth-child(3)]:-rotate-45"
+    >
       <span
-        class="rounded-full bg-gold/10 px-3 py-1 text-xs
-        font-medium text-gold border border-gold/20
-        hover:border-gold hover:bg-gold/30"
+        class="h-0.5 w-5 rounded-full bg-gold
+                    transition-all duration-300 ease-in-out"
       >
-        Contact
       </span>
-    </a>
-  </div>
+
+      <span
+        class="h-0.5 w-5 rounded-full bg-gold
+                    transition-all duration-300 ease-in-out"
+      >
+      </span>
+
+      <span
+        class="h-0.5 w-5 rounded-full bg-gold
+                    transition-all duration-300 ease-in-out"
+      >
+      </span>
+    </label>
+
+    <!-- Navigation links -->
+    <ul
+      id="primary-navigation-links"
+      class="absolute inset-x-0 top-full
+                flex max-h-0 flex-col overflow-hidden
+                border-b border-transparent
+                bg-brand-dark/95 px-4 opacity-0 shadow-xl
+                backdrop-blur-xl
+                transition-[max-height,opacity,padding,border-color]
+                duration-300 ease-in-out
+                peer-checked:max-h-80
+                peer-checked:border-neutral-800
+                peer-checked:py-4
+                peer-checked:opacity-100
+                md:static md:flex md:max-h-none md:w-auto
+                md:flex-row md:items-center md:gap-2
+                md:overflow-visible md:border-0
+                md:bg-transparent md:p-0 md:opacity-100
+                md:shadow-none md:backdrop-blur-none"
+    >
+      {
+        visibleNavItems.map((item) => {
+          const active = isActive(item.href);
+
+          return (
+            <li>
+              <a
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                class:list={[
+                  `inline-flex rounded-lg px-4 py-3 mt-2
+                    text-sm font-semibold tracking-wide
+                    transition-colors duration-200
+
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-gold/50
+                    focus-visible:ring-offset-2
+                    focus-visible:ring-offset-brand-dark
+
+                    md:px-3 md:py-2`,
+
+                  active
+                    ? `bg-gold/10 text-gold`
+                    : `text-neutral-300
+                hover:bg-white/5
+                hover:text-gold`,
+                ]}
+              >
+                {item.linkText}
+              </a>
+            </li>
+          );
+        })
+      }
+
+      <li class="mt-3 md:ml-2 md:mt-0">
+        <a
+          href="/contact"
+          aria-current={isContactActive ? "page" : undefined}
+          class:list={[
+            `inline-flex items-center justify-center
+            rounded-full border px-5 py-2.5
+            text-center text-sm font-semibold
+            transition-colors duration-200
+
+            focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-gold/50
+            focus-visible:ring-offset-2
+            focus-visible:ring-offset-brand-dark`,
+
+            isContactActive
+              ? `border-gold/50 bg-gold/20 text-gold`
+              : `border-gold/20 bg-gold/10 text-gold
+                    hover:border-gold/50
+                    hover:bg-gold/20`,
+          ]}
+        >
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
 </header>
+
+<script>
+  function initializeNavigation() {
+    const menuToggle =
+      document.querySelector<HTMLInputElement>("#navigation-toggle");
+
+    const navigation = document.querySelector<HTMLElement>(
+      "#primary-navigation-links",
+    );
+
+    if (!menuToggle || !navigation) return;
+    if (menuToggle.dataset.initialized === "true") return;
+
+    menuToggle.dataset.initialized = "true";
+
+    const updateMenuState = () => {
+      menuToggle.setAttribute("aria-expanded", String(menuToggle.checked));
+    };
+
+    const closeMenu = () => {
+      menuToggle.checked = false;
+      updateMenuState();
+    };
+
+    menuToggle.addEventListener("change", updateMenuState);
+
+    navigation.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuToggle.checked) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        closeMenu();
+      }
+    });
+
+    updateMenuState();
+  }
+
+  initializeNavigation();
+
+  document.addEventListener("astro:page-load", initializeNavigation);
+</script>
