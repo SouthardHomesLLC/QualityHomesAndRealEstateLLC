@@ -1,0 +1,412 @@
+---
+// src/pages/about.astro
+
+import Layout from "@layouts/Layout.astro";
+import Team from "@components/Team.astro";
+
+const values = [
+  {
+    title: "Local Knowledge",
+    description:
+      "Deep familiarity with Terre Haute and the surrounding Wabash Valley helps clients make informed decisions with confidence.",
+  },
+  {
+    title: "Trusted Guidance",
+    description:
+      "Clear communication, honest advice, and dependable support will remain at the center of every client relationship.",
+  },
+  {
+    title: "Quality First",
+    description:
+      "From newly built homes to property management, every service will be approached with care, attention, and high standards.",
+  },
+];
+
+const services = [
+  {
+    title: "New-Construction Homes",
+    description:
+      "Helping buyers discover and navigate the purchase of thoughtfully built new homes throughout the Wabash Valley.",
+  },
+  {
+    title: "Buying and Selling",
+    description:
+      "Providing personalized guidance for residential buyers and sellers through each stage of the real-estate process.",
+  },
+  {
+    title: "Property Management",
+    description:
+      "Supporting property owners with reliable, locally focused management services designed to protect their investment.",
+  },
+  {
+    title: "Rental Properties",
+    description:
+      "Connecting prospective tenants with quality rental homes as properties become available.",
+  },
+];
+---
+
+<Layout>
+  <main class="relative z-10 min-h-screen">
+    <!-- Hero -->
+    <section
+      class="mx-auto max-w-7xl px-6 pb-16 pt-20
+                text-center sm:pt-28"
+    >
+      <p
+        class="text-xs font-bold uppercase
+                    tracking-[0.3em] text-gold"
+      >
+        Rooted in the Wabash Valley
+      </p>
+
+      <h1
+        class="mx-auto mt-4 max-w-4xl text-4xl font-extrabold
+                    tracking-tight text-neutral-100
+                    sm:text-5xl md:text-6xl"
+      >
+        Local Experience.
+        <span class="text-gold-deep"> Quality Guidance. </span>
+      </h1>
+
+      <p
+        class="mx-auto mt-6 max-w-3xl text-base leading-8
+                    text-neutral-400 sm:text-lg"
+      >
+        Quality Homes and Real Estate LLC is a locally founded real-estate
+        company preparing to serve Terre Haute and the surrounding Wabash Valley
+        with trusted guidance, personal service, and an uncompromising
+        commitment to quality.
+      </p>
+
+      <div
+        class="mx-auto mt-8 h-px w-48 max-w-full
+                    bg-linear-to-r from-transparent via-gold
+                    to-transparent"
+      >
+      </div>
+    </section>
+
+    <!-- Company Story -->
+    <section class="mx-auto max-w-7xl px-6 py-16">
+      <div
+        class="grid gap-12 lg:grid-cols-2
+                    lg:items-center lg:gap-20"
+      >
+        <div>
+          <p
+            class="text-xs font-bold uppercase
+                            tracking-[0.25em] text-gold"
+          >
+            Our Story
+          </p>
+
+          <h2
+            class="mt-4 text-3xl font-extrabold
+                            tracking-tight text-neutral-100 sm:text-4xl"
+          >
+            Built on local relationships and real experience
+          </h2>
+
+          <div
+            class="mt-5 h-px w-16
+                            bg-linear-to-r from-gold to-transparent"
+          >
+          </div>
+
+          <div
+            class="mt-6 space-y-5 leading-7
+                            text-neutral-400"
+          >
+            <p>
+              Quality Homes and Real Estate LLC was founded by Christa
+              Summerville with a clear vision: create a trusted local
+              real-estate company where clients receive honest communication,
+              informed guidance, and personal attention from beginning to end.
+            </p>
+
+            <p>
+              Before the company’s full launch, Christa established her local
+              experience by helping buyers and sellers throughout the area. She
+              has also played a central role in marketing and selling newly
+              constructed homes from Southard Homes LLC.
+            </p>
+
+            <p>
+              That experience helped shape the foundation of Quality Homes—a
+              company focused primarily on new-construction home sales,
+              residential buying and selling, and dependable property
+              management.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="relative overflow-hidden rounded-3xl
+                        border border-neutral-800
+                        bg-brand-darker/60 p-8 shadow-xl sm:p-10"
+        >
+          <div
+            class="absolute -right-20 -top-20 h-52 w-52
+                            rounded-full bg-gold/10 blur-3xl"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div class="relative">
+            <span
+              class="text-xs font-bold uppercase
+                                tracking-[0.25em] text-gold"
+            >
+              Looking Ahead
+            </span>
+
+            <h2
+              class="mt-4 text-3xl font-bold
+                                text-neutral-100"
+            >
+              Preparing for a quality launch
+            </h2>
+
+            <p class="mt-5 leading-7 text-neutral-400">
+              Quality Homes is currently laying the groundwork for its planned
+              full launch. During this time, the company is building its
+              services, systems, property portfolio, and local partnerships to
+              ensure clients receive a polished and dependable experience from
+              day one.
+            </p>
+
+            <div
+              class="mt-8 rounded-2xl border
+                                border-gold/20 bg-gold/5 p-5"
+            >
+              <p
+                class="text-xs font-bold uppercase
+                                    tracking-[0.2em] text-gold"
+              >
+                Planned Launch
+              </p>
+
+              <p
+                class="mt-2 text-3xl font-extrabold
+                                    text-neutral-100"
+              >
+                2028
+              </p>
+
+              <p class="mt-2 text-sm text-neutral-500">
+                Continuing to build experience, partnerships, and resources
+                throughout the Wabash Valley.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partnership -->
+    <section class="mx-auto max-w-7xl px-6 py-16">
+      <div
+        class="rounded-3xl border border-gold/20
+                    bg-linear-to-br from-gold/10
+                    via-brand-darker/70 to-brand-darker/40
+                    p-8 sm:p-12"
+      >
+        <div
+          class="flex flex-col gap-8
+                        lg:flex-row lg:items-center
+                        lg:justify-between"
+        >
+          <div class="max-w-3xl">
+            <p
+              class="text-xs font-bold uppercase
+                                tracking-[0.25em] text-gold"
+            >
+              Local Partnership
+            </p>
+
+            <h2
+              class="mt-4 text-3xl font-bold
+                                text-neutral-100 sm:text-4xl"
+            >
+              Working alongside Southard Homes LLC
+            </h2>
+
+            <p class="mt-5 leading-7 text-neutral-400">
+              Quality Homes and Southard Homes operate as closely connected
+              local businesses. Christa’s experience representing and selling
+              Southard Homes’ new construction provides buyers with
+              knowledgeable guidance from someone familiar with the homes, the
+              building process, and the communities they serve.
+            </p>
+          </div>
+
+          <a
+            href="/homes-for-sale"
+            class="shrink-0 rounded-full border
+                            border-gold/30 bg-gold/10
+                            px-6 py-3 text-center text-sm
+                            font-bold text-gold transition-colors
+                            hover:border-gold/50 hover:bg-gold/20"
+          >
+            Explore Homes
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="mx-auto max-w-7xl px-6 py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <p
+          class="text-xs font-bold uppercase
+                        tracking-[0.25em] text-gold"
+        >
+          What Guides Us
+        </p>
+
+        <h2
+          class="mt-4 text-3xl font-extrabold
+                        text-neutral-100 sm:text-4xl"
+        >
+          A better local real-estate experience
+        </h2>
+
+        <p class="mt-4 leading-7 text-neutral-400">
+          Quality Homes is being built around the principles that matter most
+          when making important property decisions.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {
+          values.map((value, index) => (
+            <article
+              class="rounded-2xl border
+                                border-neutral-800
+                                bg-brand-darker/50 p-7"
+            >
+              <span class="text-sm font-bold text-gold/70" aria-hidden="true">
+                0{index + 1}
+              </span>
+
+              <h3
+                class="mt-5 text-xl font-bold
+                                    text-neutral-100"
+              >
+                {value.title}
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-6
+                                    text-neutral-400"
+              >
+                {value.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="mx-auto max-w-7xl px-6 py-20">
+      <div
+        class="rounded-3xl border border-neutral-800
+                    bg-brand-darker/40 p-8 sm:p-12"
+      >
+        <div class="max-w-3xl">
+          <p
+            class="text-xs font-bold uppercase
+                            tracking-[0.25em] text-gold"
+          >
+            What We’re Building
+          </p>
+
+          <h2
+            class="mt-4 text-3xl font-extrabold
+                            text-neutral-100 sm:text-4xl"
+          >
+            Services designed for the Wabash Valley
+          </h2>
+
+          <p class="mt-4 leading-7 text-neutral-400">
+            Our services will center on helping local clients confidently
+            navigate homeownership, property sales, and residential investments.
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+          {
+            services.map((service) => (
+              <article
+                class="rounded-2xl border
+                                    border-neutral-800
+                                    bg-brand-dark/50 p-6"
+              >
+                <h3
+                  class="text-lg font-bold
+                                        text-neutral-100"
+                >
+                  {service.title}
+                </h3>
+
+                <p
+                  class="mt-3 text-sm leading-6
+                                        text-neutral-400"
+                >
+                  {service.description}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder -->
+    <Team />
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-5xl px-6 py-20">
+      <div
+        class="rounded-3xl border border-neutral-800
+                    bg-brand-darker/60 px-8 py-14
+                    text-center shadow-xl sm:px-12"
+      >
+        <p
+          class="text-xs font-bold uppercase
+                        tracking-[0.25em] text-gold"
+        >
+          Stay Connected
+        </p>
+
+        <h2
+          class="mt-4 text-3xl font-extrabold
+                        text-neutral-100 sm:text-4xl"
+        >
+          Follow the journey toward launch
+        </h2>
+
+        <p
+          class="mx-auto mt-5 max-w-2xl
+                        leading-7 text-neutral-400"
+        >
+          Quality Homes and Real Estate LLC is preparing to bring a trusted,
+          locally focused real-estate experience to Terre Haute and the
+          surrounding Wabash Valley.
+        </p>
+
+        <a
+          href="/contact"
+          class="mt-8 inline-block rounded-full
+                        bg-gold px-7 py-3 text-sm font-bold
+                        text-brand-darker transition-colors
+                        hover:bg-gold-deep"
+        >
+          Contact Quality Homes
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

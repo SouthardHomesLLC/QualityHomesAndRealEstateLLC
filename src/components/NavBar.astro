@@ -2,6 +2,18 @@
 // src/components/NavBar.astro
 import { Image } from "astro:assets";
 import logoImage from "@assets/Quality Homes & Real Estate Logo.jpg";
+
+export interface linkItem {
+  linkText: string;
+  href: string;
+}
+
+export const navItems: linkItem[] = [
+  { linkText: "Home", href: "/" },
+  { linkText: "For Sale", href: "/homes-for-sale" },
+  { linkText: "Rentals", href: "/rentals" },
+  { linkText: "About", href: "/about" },
+];
 ---
 
 <header
@@ -24,10 +36,14 @@ import logoImage from "@assets/Quality Homes & Real Estate Logo.jpg";
       </span>
     </a>
 
-    <span
-      class="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold border border-gold/20"
-    >
-      Coming Soon
-    </span>
+    <a href="/contact" class="flex items-center gap-2">
+      <span
+        class="rounded-full bg-gold/10 px-3 py-1 text-xs
+        font-medium text-gold border border-gold/20
+        hover:border-gold hover:bg-gold/30"
+      >
+        Contact
+      </span>
+    </a>
   </div>
 </header>

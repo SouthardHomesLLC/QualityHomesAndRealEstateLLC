@@ -1,5 +1,107 @@
 ---
+// src/pages/contact.astro
+
 import Layout from "@layouts/Layout.astro";
+import ContactForm from "@components/ContactForm.astro";
 ---
 
-<Layout />
+<Layout>
+  <main class="relative z-10 min-h-screen pb-24">
+    <section
+      class="mx-auto max-w-7xl px-6 pb-12 pt-20
+                text-center sm:pt-28"
+    >
+      <p
+        class="text-xs font-bold uppercase
+                    tracking-[0.3em] text-gold"
+      >
+        Get in Touch
+      </p>
+
+      <h1
+        class="mt-4 text-4xl font-extrabold tracking-tight
+                    text-neutral-100 sm:text-5xl md:text-6xl"
+      >
+        Let’s Talk About Your
+        <span class="text-gold-deep"> Next Move</span>
+      </h1>
+
+      <p
+        class="mx-auto mt-5 max-w-2xl text-base
+                    leading-relaxed text-neutral-400 sm:text-lg"
+      >
+        Whether you’re buying, selling, or searching for your next rental,
+        Quality Homes and Real Estate LLC is ready to help.
+      </p>
+
+      <div
+        class="mx-auto mt-8 h-px w-48 max-w-full
+                    bg-linear-to-r from-transparent
+                    via-gold to-transparent"
+      >
+      </div>
+    </section>
+
+    <section
+      class="mx-auto grid max-w-7xl gap-10 px-6
+                lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]
+                lg:items-start"
+    >
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-3xl font-bold text-neutral-100">How can we help?</h2>
+
+          <p class="mt-4 leading-7 text-neutral-400">
+            Send us a message and tell us what you’re looking for. We’ll review
+            your inquiry and follow up as soon as possible.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div
+            class="rounded-2xl border border-neutral-800
+                            bg-brand-darker/50 p-6"
+          >
+            <h3 class="font-semibold text-neutral-100">Buying or Selling</h3>
+
+            <p class="mt-2 text-sm leading-6 text-neutral-400">
+              Ask about available homes, scheduling a showing, or listing your
+              property.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-neutral-800
+                            bg-brand-darker/50 p-6"
+          >
+            <h3 class="font-semibold text-neutral-100">Rental Inquiries</h3>
+
+            <p class="mt-2 text-sm leading-6 text-neutral-400">
+              Learn more about availability, lease details, applications, or
+              scheduling a rental tour.
+            </p>
+          </div>
+
+          <div
+            class="rounded-2xl border border-neutral-800
+                            bg-brand-darker/50 p-6"
+          >
+            <h3 class="font-semibold text-neutral-100">General Questions</h3>
+
+            <p class="mt-2 text-sm leading-6 text-neutral-400">
+              Have another real-estate question? Send us the details and we'll
+              point you in the right direction.
+            </p>
+          </div>
+        </div>
+
+        <p class="text-sm leading-6 text-neutral-500">
+          Fields marked with an asterisk are required. Please do not submit
+          sensitive financial or personal information through this form.
+        </p>
+      </div>
+
+      <ContactForm />
+    </section>
+  </main>
+</Layout>
