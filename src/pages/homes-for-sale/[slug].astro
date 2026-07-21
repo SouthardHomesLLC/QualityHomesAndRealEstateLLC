@@ -1,4 +1,5 @@
 ---
+// /src/pages/homes-for-sale/
 import Layout from '@layouts/Layout.astro';
 import { homesForSale } from '@data/ForSale';
 import type { ForSaleInfo } from '@data/HomeInfo';
@@ -23,7 +24,9 @@ const { home } = Astro.props;
 <Layout>
     <main class="relative z-10 min-h-screen pb-24">
         <div class="mx-auto max-w-7xl px-6 pt-10 sm:pt-14">
-            <PropertyBreadcrumb address={home.address} />
+            <PropertyBreadcrumb
+                address={home.address}
+            />
             <PropertyHeader home={home} />
             <PhotoSwipeGallery
                 images={home.images}

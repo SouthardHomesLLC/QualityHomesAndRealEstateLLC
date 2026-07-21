@@ -1,6 +1,6 @@
 ---
-import type { ForSaleInfo } from '@data/HomeInfo';
-interface Props { home: ForSaleInfo; }
+import type { ForSaleInfo, RentalInfo } from '@data/HomeInfo';
+interface Props { home: ForSaleInfo | RentalInfo; }
 const { home } = Astro.props;
 const facts = [
     [home.bedrooms, 'Bedrooms'],

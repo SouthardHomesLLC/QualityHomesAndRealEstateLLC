@@ -1,6 +1,14 @@
 ---
+// /src/pages/rentals/
 import Layout from '@layouts/Layout.astro';
 import { rentals } from '@data/Rentals';
+import type { RentalInfo } from '@data/HomeInfo';
+import PropertyBreadcrumb from '@components/property/PropertyBreadcrumb.astro';
+import PropertyHeader from '@components/property/PropertyHeader.astro';
+import PhotoSwipeGallery from '@components/property/PhotoSwipeGallery.astro';
+import PropertyFacts from '@components/property/PropertyFacts.astro';
+import PropertyContent from '@components/property/PropertyContent.astro';
+import RentalSidebar from '@components/property/RentalSidebar.astro';
 
 export function getStaticPaths() {
     return rentals.map((rental) => ({
@@ -12,26 +20,49 @@ export function getStaticPaths() {
         }
     }));
 }
-
-const { rental } = Astro.props;
+interface Props {
+    rental: RentalInfo
+}
+const { 
+    rental 
+} = Astro.props;
 ---
 
+
 <Layout>
-    <main class="relative z-10 min-h-screen px-6 py-24 text-center">
-        <h1 class="text-4xl font-bold text-neutral-100">
-            {rental.address}
-        </h1>
+    <main class="relative z-10 min-h-screen pb-24">
+        <div class="mx-auto max-w-7xl px-6 pt-10 sm:pt-14">
+            <PropertyBreadcrumb
+                address={rental.address}
+                basePath="/rentals"
+                label="Rentals"
+            />
+            <PropertyHeader home={rental} />
+            <PhotoSwipeGallery
+                images={rental.images}
+                galleryId={`preview-${rental.slug}`}
+                mode="preview"
+            />
 
-        <p class="mt-3 text-neutral-400">
-            Rental details coming soon.
-        </p>
+            <div class="mt-4 flex justify-end">
+                <a
+                    href={`/rentals/${rental.slug}/gallery`}
+                    class="rounded-full border border-neutral-700
+                        bg-brand-darker/80 px-4 py-2 text-sm font-semibold
+                        text-neutral-200 transition-colors
+                        hover:border-gold/50 hover:text-gold"
+                >
+                    View all {rental.images.length} photos
+                </a>
+            </div>
 
-        <a
-            href="/rentals"
-            class="mt-8 inline-block text-sm font-semibold text-gold
-                transition-colors hover:text-gold-deep"
-        >
-            Return to rentals
-        </a>
+            <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+                <div class="space-y-10">
+                    <PropertyFacts home={rental} />
+                    <PropertyContent home={rental} />
+                </div>
+                <RentalSidebar rental={rental} />
+            </div>
+        </div>
     </main>
 </Layout>
