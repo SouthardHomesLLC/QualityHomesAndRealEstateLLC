@@ -1,60 +1,97 @@
 ---
 // /src/pages/rentals/index.astro
-import Layout from '@layouts/Layout.astro';
-import ListingCard from '@components/ListingCard.astro';
-import { rentals } from '@data/Rentals';
+import Layout from "@layouts/Layout.astro";
+import ListingCard from "@components/ListingCard.astro";
+import { rentals } from "@data/Rentals";
 
 const availableRentals = rentals.filter(
-    (rental) => rental.status === 'available'
+  (rental) => rental.status === "available",
+);
+
+const unavailableRentals = rentals.filter(
+  (rental) => rental.status !== "available",
 );
 ---
 
 <Layout>
-    <main class="relative z-10 min-h-screen">
-        <section class="mx-auto max-w-7xl px-6 pb-12 pt-20 text-center sm:pt-28">
-            <h1
-                class="text-4xl font-extrabold tracking-tight text-neutral-200 sm:text-5xl md:text-6xl"
-            >
-                Find Your <span class="text-gold-deep">Home</span>
-            </h1>
+  <main class="relative z-10 min-h-screen">
+    <section class="mx-auto max-w-7xl px-6 pb-12 pt-20 text-center sm:pt-28">
+      <h1
+        class="text-4xl font-extrabold tracking-tight text-neutral-200 sm:text-5xl md:text-6xl"
+      >
+        Find Your <span class="text-gold-deep">Home</span>
+      </h1>
 
-            <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg">
-                Explore available homes throughout Terre Haute and the surrounding
-                Wabash Valley.
-            </p>
+      <p
+        class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg"
+      >
+        Explore available homes throughout Terre Haute and the surrounding
+        Wabash Valley.
+      </p>
 
-            <div
-                class="mx-auto mt-8 h-px w-96 bg-linear-to-r from-transparent via-gold to-transparent"
-            >
+      <div
+        class="mx-auto mt-8 h-px w-96 bg-linear-to-r from-transparent via-gold to-transparent"
+      >
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 pb-24">
+      {
+        availableRentals.length > 0 ? (
+          <section>
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-neutral-100 sm:text-3xl">
+                Available Rentals
+              </h2>
+
+              <p class="mt-2 text-sm text-neutral-400">
+                Explore homes currently available to rent.
+              </p>
             </div>
-        </section>
 
-        <section class="mx-auto max-w-7xl px-6 pb-24">
-            {
-                availableRentals.length > 0 ? (
-                    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-                        {
-                            availableRentals.map((rental) => (
-                                <ListingCard
-                                    listing={rental}
-                                    hrefPrefix="/rentals"
-                                />
-                            ))
-                        }
-                    </div>
-                ) : (
-                    <div class="mx-auto max-w-2xl rounded-2xl border border-neutral-800 bg-brand-darker/50 px-6 py-16 text-center">
-                        <h2 class="text-2xl font-bold text-neutral-100">
-                            New listings are coming soon
-                        </h2>
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+              {availableRentals.map((rental) => (
+                <ListingCard listing={rental} hrefPrefix="/rentals" />
+              ))}
+            </div>
+          </section>
+        ) : (
+          <div
+            class="rounded-2xl border border-neutral-800
+                            bg-brand-darker/50 px-6 py-14 text-center"
+          >
+            <h2 class="text-2xl font-bold text-neutral-100">
+              No rentals are currently available
+            </h2>
 
-                        <p class="mt-3 text-neutral-400">
-                            Check back soon to explore homes available throughout the
-                            Wabash Valley.
-                        </p>
-                    </div>
-                )
-            }
-        </section>
-    </main>
+            <p class="mt-3 text-neutral-400">
+              Check back soon for new rental opportunities.
+            </p>
+          </div>
+        )
+      }
+
+      {
+        unavailableRentals.length > 0 && (
+          <section class="mt-20 border-t border-neutral-800 pt-12">
+            <div class="mb-8">
+              <h2 class="text-2xl font-bold text-neutral-100 sm:text-3xl">
+                Currently Unavailable
+              </h2>
+
+              <p class="mt-2 text-sm text-neutral-400">
+                View previously listed and currently occupied properties.
+              </p>
+            </div>
+
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+              {unavailableRentals.map((rental) => (
+                <ListingCard listing={rental} hrefPrefix="/rentals" />
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </section>
+  </main>
 </Layout>

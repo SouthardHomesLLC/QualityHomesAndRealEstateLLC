@@ -1,26 +1,32 @@
 ---
 // src/components/NavBar.astro
-import { Image } from 'astro:assets';
-import logoImage from '@assets/Quality Homes & Real Estate Logo.jpg';
+import { Image } from "astro:assets";
+import logoImage from "@assets/Quality Homes & Real Estate Logo.jpg";
 ---
 
-<header class="sticky top-0 z-50 w-full border-b 
-  border-neutral-800 bg-brand-dark/80 backdrop-blur-md">
+<header
+  class="sticky top-0 z-50 w-full border-b
+  border-neutral-800 bg-brand-dark/80 backdrop-blur-md"
+>
   <div class="mx-auto flex max-w-7xl h-16 items-center justify-between px-6">
     <a href="/" class="flex items-center gap-2">
-      <Image 
-        src={logoImage} 
-        alt="Quality Homes Logo" 
-        width={45} 
-        height={45} 
+      <Image
+        src={logoImage}
+        alt="Quality Homes Logo"
+        width={45}
+        height={45}
         class="object-contain rounded-full"
       />
-      <span class="text-sm font-semibold tracking-wider text-gold hidden sm:block">
+      <span
+        class="text-sm font-semibold tracking-wider text-gold hidden sm:block"
+      >
         Quality Homes and Real Estate LLC
       </span>
     </a>
-    
-    <span class="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold border border-gold/20">
+
+    <span
+      class="rounded-full bg-gold/10 px-3 py-1 text-xs font-medium text-gold border border-gold/20"
+    >
       Coming Soon
     </span>
   </div>

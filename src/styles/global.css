@@ -3,12 +3,12 @@
 @theme {
   /* Brand Neutrals */
   --color-brand-dark: #111111;
-  --color-brand-darker: #0A0A0A;
+  --color-brand-darker: #0a0a0a;
 
   /* Logo Gold Accents */
-  --color-gold: #E6A778;
-  --color-gold-muted: #C49470;
-  --color-gold-deep: #CC7F43;
+  --color-gold: #e6a778;
+  --color-gold-muted: #c49470;
+  --color-gold-deep: #cc7f43;
 }
 
 body {

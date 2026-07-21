@@ -1,12 +1,13 @@
 ---
 // /src/components/GoldParticles.astro
 ---
+
 <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
   <canvas id="particle-canvas" class="block w-full h-full"></canvas>
 </div>
 
 <script>
-    import { particles } from "@scripts/goldparticles";
+  import { particles } from "@scripts/goldparticles";
 
-    particles();
+  particles();
 </script>

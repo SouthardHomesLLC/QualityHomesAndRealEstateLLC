@@ -1,20 +1,23 @@
 ---
 // src/components/Team.astro
-import { Image } from 'astro:assets';
-import founderImage from '@assets/christa.jpg'; 
+import { Image } from "astro:assets";
+import founderImage from "@assets/christa.jpg";
 ---
 
 <section class="w-full max-w-4xl mx-auto px-6 py-24">
-  <div class="flex flex-col md:flex-row items-center gap-12 bg-brand-darker/30 p-8 md:p-12 rounded-3xl border border-neutral-800 shadow-xl">
-    
+  <div
+    class="flex flex-col md:flex-row items-center gap-12 bg-brand-darker/30 p-8 md:p-12 rounded-3xl border border-neutral-800 shadow-xl"
+  >
     <!-- Profile Image Ring -->
-    <div class="relative shrink-0 w-44 h-44 rounded-2xl overflow-hidden border border-gold/30 p-2 bg-brand-dark">
+    <div
+      class="relative shrink-0 w-44 h-44 rounded-2xl overflow-hidden border border-gold/30 p-2 bg-brand-dark"
+    >
       <div class="w-full h-full rounded-xl overflow-hidden">
-        <Image 
-          src={founderImage} 
-          alt="Principal Broker" 
-          width={176} 
-          height={176} 
+        <Image
+          src={founderImage}
+          alt="Principal Broker"
+          width={176}
+          height={176}
           class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
         />
       </div>
@@ -22,19 +25,26 @@ import founderImage from '@assets/christa.jpg';
 
     <!-- Bio Content -->
     <div class="flex-1 text-center md:text-left">
-      <span class="text-xs font-bold tracking-widest text-gold uppercase block mb-2">The Driving Force</span>
-      <h2 class="text-3xl font-extrabold text-neutral-100 tracking-tight mb-1">Christa Summerville</h2>
+      <span
+        class="text-xs font-bold tracking-widest text-gold uppercase block mb-2"
+        >The Driving Force</span
+      >
+      <h2 class="text-3xl font-extrabold text-neutral-100 tracking-tight mb-1">
+        Christa Summerville
+      </h2>
       <p class="text-sm font-medium text-gold/80 mb-4">Founder and CEO</p>
-      
-      <p class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-2xl">
-        Christa is transforming how properties are bought and sold by pairing uncompromising 
-        standards with absolute transparency. Recognizing a need for a more personalized, 
-        advocate-driven approach to real estate, she launched Quality Homes to offer 
-        an exclusive boutique alternative. Every client receives unmatched 
-        strategic navigation, ensuring that your real estate goals are executed with 
-        precision and elite quality from start to finish.
+
+      <p
+        class="text-neutral-400 text-base md:text-lg leading-relaxed max-w-2xl"
+      >
+        Christa is transforming how properties are bought and sold by pairing
+        uncompromising standards with absolute transparency. Recognizing a need
+        for a more personalized, advocate-driven approach to real estate, she
+        launched Quality Homes to offer an exclusive boutique alternative. Every
+        client receives unmatched strategic navigation, ensuring that your real
+        estate goals are executed with precision and elite quality from start to
+        finish.
       </p>
     </div>
-
   </div>
 </section>

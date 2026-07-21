@@ -1,27 +1,32 @@
 ---
 // src/components/Hero.astro
-import { Image } from 'astro:assets';
-import logoImage from '@assets/Logo.png';
+import { Image } from "astro:assets";
+import logoImage from "@assets/Logo.png";
 ---
 
-<main class="relative flex min-h-[85vh] flex-col items-center justify-center p-8 text-center overflow-hidden">  
-    <div class="relative z-10 flex flex-col items-center">
-        <Image 
-            src={logoImage} 
-            alt="Quality Homes Logo" 
-            width={320} 
-            height={320} 
-            class="mb-8 dropping-shadow bg-gold/2 rounded-full" 
-        />
+<main
+  class="relative flex min-h-[85vh] flex-col items-center justify-center p-8 text-center overflow-hidden"
+>
+  <div class="relative z-10 flex flex-col items-center">
+    <Image
+      src={logoImage}
+      alt="Quality Homes Logo"
+      width={320}
+      height={320}
+      class="mb-8 dropping-shadow bg-gold/2 rounded-full"
+    />
 
-        <h1 class="text-4xl md:text-6xl font-bold text-gold-deep tracking-tight mb-4">
-            Something Quality is Building.
-        </h1>
-        
-        <p class="text-neutral-400 text-lg md:text-xl max-w-2xl leading-relaxed">
-            We are crafting an elevated digital experience for Quality Homes and Real Estate LLC.
-        </p>
-    </div>
+    <h1
+      class="text-4xl md:text-6xl font-bold text-gold-deep tracking-tight mb-4"
+    >
+      Something Quality is Building.
+    </h1>
+
+    <p class="text-neutral-400 text-lg md:text-xl max-w-2xl leading-relaxed">
+      We are crafting an elevated digital experience for Quality Homes and Real
+      Estate LLC.
+    </p>
+  </div>
 </main>
 
 <style>

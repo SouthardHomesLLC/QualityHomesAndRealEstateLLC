@@ -1,42 +1,51 @@
 ---
 interface Props {
-    address: string;
-    basePath?: '/homes-for-sale' | '/rentals';
-    label?: string;
-    gallery?: boolean;
+  address: string;
+  basePath?: "/homes-for-sale" | "/rentals";
+  label?: string;
+  gallery?: boolean;
 }
 
 const {
-    address,
-    basePath = '/homes-for-sale',
-    label = 'Homes for Sale',
-    gallery = false
+  address,
+  basePath = "/homes-for-sale",
+  label = "Homes for Sale",
+  gallery = false,
 } = Astro.props;
 ---
 
 <nav aria-label="Breadcrumb" class="mb-6">
-    <ol class="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
-        <li><a href="/" class="transition-colors hover:text-gold">Home</a></li>
-        <li aria-hidden="true">/</li>
-        <li>
-            <a href={basePath} class="transition-colors hover:text-gold">
-                {label}
-            </a>
-        </li>
-        <li aria-hidden="true">/</li>
-        <li>
-            {gallery ? (
-                <a href={`../`} class="transition-colors hover:text-gold">{address}</a>
-            ) : (
-                <span class="text-neutral-300" aria-current="page">{address}</span>
-            )}
-        </li>
-        {gallery && (
-            <>
-                <li aria-hidden="true">/</li>
-                <li class="text-neutral-300" aria-current="page">Gallery</li>
-            </>
-        )}
-    </ol>
+  <ol class="flex flex-wrap items-center gap-2 text-sm text-neutral-500">
+    <li><a href="/" class="transition-colors hover:text-gold">Home</a></li>
+    <li aria-hidden="true">/</li>
+    <li>
+      <a href={basePath} class="transition-colors hover:text-gold">
+        {label}
+      </a>
+    </li>
+    <li aria-hidden="true">/</li>
+    <li>
+      {
+        gallery ? (
+          <a href={`../`} class="transition-colors hover:text-gold">
+            {address}
+          </a>
+        ) : (
+          <span class="text-neutral-300" aria-current="page">
+            {address}
+          </span>
+        )
+      }
+    </li>
+    {
+      gallery && (
+        <>
+          <li aria-hidden="true">/</li>
+          <li class="text-neutral-300" aria-current="page">
+            Gallery
+          </li>
+        </>
+      )
+    }
+  </ol>
 </nav>
-
