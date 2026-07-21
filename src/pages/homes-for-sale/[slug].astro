@@ -1,0 +1,58 @@
+---
+export const prerender = true;
+
+import Layout from '@layouts/Layout.astro';
+import { homesForSale } from '@data/ForSale';
+import type { ForSaleInfo } from '@data/HomeInfo';
+import PropertyBreadcrumb from '@components/property/PropertyBreadcrumb.astro';
+import PropertyHeader from '@components/property/PropertyHeader.astro';
+import PhotoSwipeGallery from '@components/property/PhotoSwipeGallery.astro';
+import PropertyFacts from '@components/property/PropertyFacts.astro';
+import PropertyContent from '@components/property/PropertyContent.astro';
+import PropertySidebar from '@components/property/PropertySidebar.astro';
+
+export function getStaticPaths() {
+    return homesForSale.map((home) => ({
+        params: { slug: home.slug },
+        props: { home }
+    }));
+}
+
+interface Props { home: ForSaleInfo; }
+const { home } = Astro.props;
+---
+
+<Layout>
+    <main class="relative z-10 min-h-screen pb-24">
+        <div class="mx-auto max-w-7xl px-6 pt-10 sm:pt-14">
+            <PropertyBreadcrumb address={home.address} />
+            <PropertyHeader home={home} />
+            <PhotoSwipeGallery
+                images={home.images}
+                galleryId={`preview-${home.slug}`}
+                mode="preview"
+            />
+
+            <div class="mt-4 flex justify-end">
+                <a
+                    href={`/homes-for-sale/${home.slug}/gallery`}
+                    class="rounded-full border border-neutral-700
+                        bg-brand-darker/80 px-4 py-2 text-sm font-semibold
+                        text-neutral-200 transition-colors
+                        hover:border-gold/50 hover:text-gold"
+                >
+                    View all {home.images.length} photos
+                </a>
+            </div>
+
+            <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_360px]">
+                <div class="space-y-10">
+                    <PropertyFacts home={home} />
+                    <PropertyContent home={home} />
+                </div>
+                <PropertySidebar home={home} />
+            </div>
+        </div>
+    </main>
+</Layout>
+

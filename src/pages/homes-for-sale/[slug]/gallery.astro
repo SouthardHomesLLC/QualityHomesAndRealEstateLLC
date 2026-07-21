@@ -1,0 +1,45 @@
+---
+export const prerender = true;
+
+import Layout from '@layouts/Layout.astro';
+import { homesForSale } from '@data/ForSale';
+import type { ForSaleInfo } from '@data/HomeInfo';
+import PropertyBreadcrumb from '@components/property/PropertyBreadcrumb.astro';
+import PhotoSwipeGallery from '@components/property/PhotoSwipeGallery.astro';
+
+export function getStaticPaths() {
+    return homesForSale.map((home) => ({
+        params: { slug: home.slug },
+        props: { home }
+    }));
+}
+
+interface Props { home: ForSaleInfo; }
+const { home } = Astro.props;
+---
+
+<Layout>
+    <main class="relative z-10 min-h-screen pb-24">
+        <div class="mx-auto max-w-7xl px-6 pt-10 sm:pt-14">
+            <PropertyBreadcrumb address={home.address} gallery />
+
+            <header class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.2em] text-gold">Property Gallery</p>
+                    <h1 class="mt-2 text-3xl font-extrabold text-neutral-100 sm:text-4xl">{home.address}</h1>
+                    <p class="mt-2 text-neutral-400">{home.images.length} {home.images.length === 1 ? 'photo' : 'photos'}</p>
+                </div>
+                <a href={`/homes-for-sale/${home.slug}`} class="text-sm font-semibold text-gold transition hover:text-gold-deep">
+                    Back to property details
+                </a>
+            </header>
+
+            <PhotoSwipeGallery
+                images={home.images}
+                galleryId={`full-gallery-${home.slug}`}
+                mode="full"
+            />
+        </div>
+    </main>
+</Layout>
+
