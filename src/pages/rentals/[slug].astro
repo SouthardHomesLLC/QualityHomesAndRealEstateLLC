@@ -1,3 +1,37 @@
-<div>
-    Test
-</div>
+---
+import Layout from '@layouts/Layout.astro';
+import { rentals } from '@data/Rentals';
+
+export function getStaticPaths() {
+    return rentals.map((rental) => ({
+        params: {
+            slug: rental.slug
+        },
+        props: {
+            rental
+        }
+    }));
+}
+
+const { rental } = Astro.props;
+---
+
+<Layout>
+    <main class="relative z-10 min-h-screen px-6 py-24 text-center">
+        <h1 class="text-4xl font-bold text-neutral-100">
+            {rental.address}
+        </h1>
+
+        <p class="mt-3 text-neutral-400">
+            Rental details coming soon.
+        </p>
+
+        <a
+            href="/rentals"
+            class="mt-8 inline-block text-sm font-semibold text-gold
+                transition-colors hover:text-gold-deep"
+        >
+            Return to rentals
+        </a>
+    </main>
+</Layout>
