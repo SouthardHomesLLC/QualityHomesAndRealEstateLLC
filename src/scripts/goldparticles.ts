@@ -4,116 +4,159 @@ import * as THREE from "three";
 export function particles() {
   const canvas = document.getElementById(
     "particle-canvas",
-  ) as HTMLCanvasElement;
+  ) as HTMLCanvasElement | null;
 
-  if (canvas) {
-    //Scene Setup
-    const scene = new THREE.Scene();
+  if (!canvas) return;
 
-    //Camera Setup
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    );
-    camera.position.z = 5;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
-    //Renderer Setup
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-    });
+  if (reducedMotion) return;
 
-    //Explicitly force the canvas element style widths to match the renderer
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
+  const particlesCount = isMobile ? 100 : 200;
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  //Scene setup
+  const scene = new THREE.Scene();
 
-    //Particles Geometry & Material
-    const particlesCount = 300;
-    const positions = new Float32Array(particlesCount * 3);
+  //Camera setup
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  );
 
-    for (let i = 0; i < particlesCount * 3; i += 3) {
-      //Spread particles across the screen
-      positions[i] = (Math.random() - 0.5) * 12; //X axis
-      positions[i + 1] = (Math.random() - 0.5) * 10; //Y axis
-      positions[i + 2] = (Math.random() - 0.5) * 5; //Z axis
+  camera.position.z = 5;
+
+  //Renderer setup
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+  });
+
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+  //Particle geometry
+  const positions = new Float32Array(particlesCount * 3);
+
+  for (let i = 0; i < positions.length; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 12;
+    positions[i + 1] = (Math.random() - 0.5) * 10;
+    positions[i + 2] = (Math.random() - 0.5) * 5;
+  }
+
+  const geometry = new THREE.BufferGeometry();
+
+  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+
+  //Soft particle texture
+  const createCircleTexture = () => {
+    const textureCanvas = document.createElement("canvas");
+
+    textureCanvas.width = 16;
+    textureCanvas.height = 16;
+
+    const context = textureCanvas.getContext("2d");
+
+    if (context) {
+      const gradient = context.createRadialGradient(8, 8, 0, 8, 8, 8);
+
+      gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+      gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 16, 16);
     }
 
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return new THREE.CanvasTexture(textureCanvas);
+  };
 
-    //Create a soft particle texture using basic canvas drawing
-    const createCircleTexture = () => {
-      const c = document.createElement("canvas");
-      c.width = 16;
-      c.height = 16;
-      const ctx = c.getContext("2d");
-      if (ctx) {
-        const gradient = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
-        gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, 16, 16);
+  const particleTexture = createCircleTexture();
+
+  const material = new THREE.PointsMaterial({
+    size: 0.04,
+    color: new THREE.Color("#E6A778"),
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    map: particleTexture,
+  });
+
+  const particleMesh = new THREE.Points(geometry, material);
+  scene.add(particleMesh);
+
+  const timer = new THREE.Timer();
+
+  let animationFrameId = 0;
+  let isVisible = !document.hidden;
+
+  const animate = (timestamp: number) => {
+    animationFrameId = requestAnimationFrame(animate);
+
+    if (!isVisible) return;
+
+    timer.update(timestamp);
+
+    const elapsedTime = timer.getElapsed();
+    const delta = Math.min(timer.getDelta(), 0.05);
+
+    const positionAttribute = geometry.getAttribute(
+      "position",
+    ) as THREE.BufferAttribute;
+
+    const currentPositions = positionAttribute.array as Float32Array;
+
+    for (let i = 0; i < currentPositions.length; i += 3) {
+      currentPositions[i + 1] += 0.06 * delta;
+      currentPositions[i] += Math.sin(elapsedTime + i) * 0.025 * delta;
+
+      if (currentPositions[i + 1] > 5) {
+        currentPositions[i + 1] = -5;
       }
-      return new THREE.CanvasTexture(c);
-    };
+    }
 
-    const material = new THREE.PointsMaterial({
-      size: 0.04,
-      color: new THREE.Color("#E6A778"), //logo gold
-      transparent: true,
-      opacity: 0.6,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      map: createCircleTexture(),
-    });
+    positionAttribute.needsUpdate = true;
+    renderer.render(scene, camera);
+  };
 
-    const particleMesh = new THREE.Points(geometry, material);
-    scene.add(particleMesh);
+  const handleVisibilityChange = () => {
+    isVisible = !document.hidden;
+  };
 
-    //Animation Loop
-    const clock = new THREE.Timer();
+  const handleResize = () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 
-    const animate = (timestamp: number) => {
-      requestAnimationFrame(animate);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  };
 
-      //Update the timer exactly once using the frame timestamp
-      clock.update(timestamp);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 
-      const elapsedTime = clock.getElapsed();
-      const currentPositions = geometry.attributes.position
-        .array as Float32Array;
+  window.addEventListener("resize", handleResize);
 
-      //Make particles gently drift upwards and sway side to side
-      for (let i = 0; i < particlesCount * 3; i += 3) {
-        //Slow upward movement
-        currentPositions[i + 1] += 0.001;
-        //Swaying effect using sine waves based on particle index
-        currentPositions[i] += Math.sin(elapsedTime + i) * 0.0008;
+  animationFrameId = requestAnimationFrame(animate);
 
-        //Reset particle to bottom if it goes too high
-        if (currentPositions[i + 1] > 5) {
-          currentPositions[i + 1] = -5;
-        }
-      }
+  //Optional cleanup for Astro navigation or component removal
+  return () => {
+    cancelAnimationFrame(animationFrameId);
 
-      geometry.attributes.position.needsUpdate = true;
-      renderer.render(scene, camera);
-    };
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
 
-    //Bootstrap the loop by passing a baseline performance timestamp
-    requestAnimationFrame(animate);
+    window.removeEventListener("resize", handleResize);
 
-    //Handle Window Resize
-    window.addEventListener("resize", () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  }
+    scene.remove(particleMesh);
+    geometry.dispose();
+    material.dispose();
+    particleTexture.dispose();
+    renderer.dispose();
+  };
 }

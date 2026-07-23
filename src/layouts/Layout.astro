@@ -2,7 +2,6 @@
 import "@styles/global.css";
 import NavBar from "@components/NavBar.astro";
 import Footer from "@components/Footer.astro";
-import GoldParticles from "@components/GoldParticles.astro";
 ---
 
 <!doctype html>
@@ -16,9 +15,6 @@ import GoldParticles from "@components/GoldParticles.astro";
   </head>
 
   <body class="bg-brand-dark text-neutral-100 font-sans antialiased">
-    <!-- Three.js Canvas Background -->
-    <GoldParticles />
-
     <NavBar />
 
     <slot />
